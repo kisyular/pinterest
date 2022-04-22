@@ -35,7 +35,9 @@ const Pin = (props) => {
 					<AntDesign name='hearto' size={16} color='white' />
 				</Pressable>
 			</View>
-			<Text style={styles.title}>{title}</Text>
+			<Text style={styles.title} numberOfLines={3}>
+				{title}
+			</Text>
 		</View>
 	)
 }
