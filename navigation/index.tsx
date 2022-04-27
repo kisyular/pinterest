@@ -20,6 +20,8 @@ import ModalScreen from '../screens/ModalScreen'
 import NotFoundScreen from '../screens/NotFoundScreen'
 import HomeScreen from '../screens/HomeScreen'
 import ProfileScreen from '../screens/ProfileScreen'
+import PinScreen from '../screens/PinScreen'
+
 import {
 	RootStackParamList,
 	RootTabParamList,
@@ -57,6 +59,12 @@ function RootNavigator() {
 				options={{ headerShown: false }}
 			/>
 			<Stack.Screen
+				name='Pin'
+				component={PinScreen}
+				options={{ headerShown: false }}
+			/>
+
+			<Stack.Screen
 				name='NotFound'
 				component={NotFoundScreen}
 				options={{ title: 'Oops!' }}
@@ -79,58 +87,42 @@ function BottomTabNavigator() {
 
 	return (
 		<BottomTab.Navigator
-			initialRouteName='HomeScreen'
+			initialRouteName='Home'
 			screenOptions={{
 				tabBarActiveTintColor: Colors[colorScheme].tint,
+				tabBarShowLabel: false,
 			}}
 		>
 			<BottomTab.Screen
-				name='HomeScreen'
+				name='Home'
 				component={HomeScreen}
-				options={({
-					navigation,
-				}: RootTabScreenProps<'HomeScreen'>) => ({
-					title: 'Home Screen',
+				options={{
+					title: 'Home',
 					tabBarIcon: ({ color }) => (
-						<TabBarIcon name='code' color={color} />
+						<FontAwesome name='home' size={30} color={color} />
 					),
-					headerRight: () => (
-						<Pressable
-							onPress={() => navigation.navigate('Modal')}
-							style={({ pressed }) => ({
-								opacity: pressed ? 0.5 : 1,
-							})}
-						>
-							<FontAwesome
-								name='info-circle'
-								size={25}
-								color={Colors[colorScheme].text}
-								style={{ marginRight: 15 }}
-							/>
-						</Pressable>
+				}}
+			/>
+			<BottomTab.Screen
+				name='CreatePin'
+				component={HomeScreen}
+				options={{
+					title: 'Home',
+					tabBarIcon: ({ color }) => (
+						<FontAwesome name='plus' size={30} color={color} />
 					),
-				})}
+				}}
 			/>
 			<BottomTab.Screen
 				name='ProfileScreen'
 				component={ProfileScreen}
 				options={{
-					title: 'Profile Screen',
+					title: 'Profile',
 					tabBarIcon: ({ color }) => (
-						<TabBarIcon name='code' color={color} />
+						<FontAwesome name='user' size={30} color={color} />
 					),
 				}}
 			/>
 		</BottomTab.Navigator>
 	)
-}
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-	name: React.ComponentProps<typeof FontAwesome>['name']
-	color: string
-}) {
-	return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />
 }

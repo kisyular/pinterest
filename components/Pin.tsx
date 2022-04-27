@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 const Pin = (props) => {
 	const [ratio, setRatio] = useState(1)
 	const navigation = useNavigation()
-	const { image, title } = props.pin
+	const { id, image, title } = props.pin
 
 	useEffect(() => {
 		if (image) {
@@ -23,7 +23,7 @@ const Pin = (props) => {
 		navigation.navigate('Pin', { id })
 	}
 	return (
-		<View style={styles.pin}>
+		<Pressable onPress={goToPinPage} style={styles.pin}>
 			<View>
 				<Image
 					style={[styles.image, { aspectRatio: ratio }]}
@@ -38,7 +38,7 @@ const Pin = (props) => {
 			<Text style={styles.title} numberOfLines={3}>
 				{title}
 			</Text>
-		</View>
+		</Pressable>
 	)
 }
 
